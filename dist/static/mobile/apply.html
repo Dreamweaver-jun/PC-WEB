@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0"/>
+    <title></title>
+    <link href="./css/style.css" rel="stylesheet">
+    <script src="./js/rem.js"></script>
+    <script src="./js/jquery-1.11.2.min.js"></script>
+    <script>
+
+    $(function(){
+      //防止软键盘压缩高度导致布局异常
+      $('body').height($('body')[0].clientHeight);
+
+
+      var btn = $('.submit-btn');
+      var apiUrl = 'http://www.loji.com/tms/inner/register';
+      btn.on('click',function(){
+        var formData = {
+          applyMobileNo : $('#tel').val(),
+          legalPerson : $('#name').val(),
+          compName : $('#company').val()
+        };
+
+        if(formData.applyMobileNo && formData.legalPerson && formData.compName){
+
+          $.ajax({
+            method : 'POST',
+            url: apiUrl,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(formData)
+          }).done(function(response){
+            if(response.success === true)
+            {
+              alert('您的申请提交成功，我们的工作人员会在看到信息后尽快联系您！');
+            }
+            else
+            {
+              alert(response.error);
+            }
+          }).error(function(){
+            alert('网络错误!');
+          });
+        }
+        else
+        {
+          alert('请输入您的信息！');
+          return false;
+        }
+      });
+    });
+
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="form-wrap">
+      <div class="input-wrap">
+        <input type="text" id="tel" placeholder="请输入您的手机号码" maxlength="11">
+      </div>
+      <div class="input-wrap">
+        <input type="text" id="name" placeholder="请输入您的姓名" maxlength="8">
+      </div>
+      <div class="input-wrap">
+        <input type="text" id="company" placeholder="请输入您的公司名称" maxlength="15">
+      </div>
+      <div class="btn-wrap">
+        <div class="submit-btn">立即开通</div>
+      </div>
+    </div>
+    <div class="font-wrap">
+      <p class="hot-line">咨询热线：400-890-0856</p>
+      <p>广州市天河区科韵路棠福路2号</p>
+      <p>顺盈商业大厦7层</p>
+    </div>
+  </div>
+</body>
+</html>

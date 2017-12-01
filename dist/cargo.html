@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>罗计物流</title>
+</head>
+<Style>
+  .zi{width: 100%; display: none;}.lef{float: left;width: 80%;}.lef p{text-align:center; line-height: 30px; font-size: 20px;}.rig{float: right;width: 10%;margin-right:2%;font-size: 30px;}
+</Style>
+<body>
+<h1>如果还未开始下载，请点击右上角选择浏览器打开</h1>
+<div class="zi" >
+  <div class="lef"><p>您正在使用微信浏览器,<br>请点击右上角,<br>选择'在浏览器中打开'</p></div>
+  <div class="rig"><h1>↑</h1></div>
+</div>
+<script type="text/javascript" src="http://m.eunke.com/Details/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+  if ((navigator.userAgent.match(/(Android)/i))) {
+    location.href = "http://donkey.loji.com/inner/android/cargo";
+//location.href = "http://www.baidu.com";
+    window.onload = function(){
+      if(isWeiXin()){
+        $('.zi').css({display:'block'})
+      }
+    }
+    function isWeiXin(){
+      var ua = window.navigator.userAgent.toLowerCase();
+      if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  } else {
+    if ((navigator.userAgent.match(/(iPhone|iPod|iOS|iPad)/i))) {
+      location.href = "https://itunes.apple.com/cn/app/xiao-mao-lu-wu-liu-huo-zhu/id898641448?mt=8"
+    } else {}
+  }
+</script>
+</body>
+</html>

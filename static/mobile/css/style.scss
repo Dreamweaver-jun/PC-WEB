@@ -1,0 +1,100 @@
+@function strip-units($number){
+  @return $number / 75;
+  //@return $number / ($number * 0 + 1);
+}
+
+
+@mixin remCalc($property, $values...){
+  $max: length($values);
+  $pxValues: '';
+  $remValues: '';
+
+  @for $i from 1 through $max {
+    $value: strip-units(nth($values, $i));
+    //$browser-default-font-size: strip-units($browser-default-font-size);
+    $pxValues: #{$pxValues + $value * 75}px;
+
+    @if $i < $max {
+      $pxValues: #{$pxValues + " "};
+    }
+  }
+
+
+  @for $i from 1 through $max {
+    $value: strip-units(nth($values, $i));
+    $remValues: #{$remValues + $value}rem;
+
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+    }
+  }
+
+  //#{$property}: $pxValues;
+  #{$property}: $remValues;
+}
+
+
+
+html,body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url("../img/apply-bg.png") no-repeat;
+  background-size: cover;
+  .form-wrap {
+    position: relative;
+    @include remCalc(top,300);
+    @include remCalc(padding-left,120);
+    @include remCalc(padding-right,120);
+    margin: 0 auto;
+    .input-wrap {
+      @include remCalc(margin-bottom,30);
+      input {
+        width: 100%;
+        @include remCalc(height,90);
+        @include remCalc(border-radius,66);
+        @include remCalc(font-size,30);
+        @include remCalc(text-indent,40);
+        padding: 0;
+        opacity: .8;
+        border: none;
+      }
+    }
+    .btn-wrap {
+      @include remCalc(margin-top,78);
+      .submit-btn {
+        width: 100%;
+        background: #ffa030;
+        color: #fff;
+        text-align: center;
+        @include remCalc(height,90);
+        @include remCalc(line-height,90);
+        @include remCalc(font-size,36);
+        @include remCalc(border-radius,66);
+        @include remCalc(letter-spacing,10);
+      }
+    }
+  }
+  .font-wrap {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    @include remCalc(bottom,50);
+    @include remCalc(font-size,30);
+    p {
+      @include remCalc(margin-top,10);
+      @include remCalc(letter-spacing,4);
+      margin-bottom: 0;
+    }
+    p.hot-line {
+      @include remCalc(font-size,36);
+    }
+  }
+}
